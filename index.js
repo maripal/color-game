@@ -3,6 +3,21 @@ let colors = generateRandomColors(6);
 let squares = document.querySelectorAll('.square');
 let messageDisplay = document.querySelector('#message');
 let h1 = document.querySelector('h1');
+let resetButton = document.querySelector('#reset');
+
+resetButton.addEventListener('click', function() {
+  //when button is clicked. generate all new colors
+  colors = generateRandomColors(6)
+  //pick new random color from array
+  pickedColor = pickColor();
+  //change color display to match picked color
+  colorDisplay.textContent = pickedColor;
+  //change colors of squares
+  for (let i = 0; i < squares.length; i++) {
+    squares[i].style.backgroundColor = colors[i];
+  }
+  h1.style.backgroundColor = '#232323';
+})
 
 //To display the rgb color you need to guess
 let pickedColor = pickColor();
@@ -23,6 +38,7 @@ for (let i = 0; i < squares.length; i++) {
     //compare color to pickedColor
     if (clickedColor === pickedColor) {
       messageDisplay.textContent = "Correct!";
+      resetButton.textContent = "Play Again?";
       //If correct, all squares change to that color. So we call this function w/ the correct color(clickedColor).
       changeColors(clickedColor);
       h1.style.backgroundColor = clickedColor;
